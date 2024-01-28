@@ -5,9 +5,14 @@ import os
 
 
 def load_data(data):
-    data = pd.read_csv(data, sep=";")
-    return data
+    dataframe = pd.read_csv(data, sep=";")
+    return dataframe
 
+def delete_outliers(dataframe):
+    min_mileage = 0
+    max_mileage = 500000
+    dataframe = dataframe.loc[(dataframe['mileage'] >= min_mileage) & (dataframe['mileage'] <= max_mileage)]
+    return dataframe
 
 def strings_to_date(dataframe):
     for column in dataframe.columns:
@@ -62,10 +67,11 @@ def feature_engineering(dataframe):
 def get_train_data(data):
     df = load_data(data)
     df.drop(columns=['maker_key', 'model_key'], inplace=True)
-    df_1 = strings_to_date(df)
-    df_2 = booleans_to_numeric(df_1)
-    df_3 = strings_to_numeric(df_2)
-    feature_engineering(df_3)
-    df_4 = get_dummies(df_3)
-    return df_4
+    df_1 = delete_outliers(df)
+    df_2 = strings_to_date(df_1)
+    df_3 = booleans_to_numeric(df_2)
+    df_4 = strings_to_numeric(df_3)
+    feature_engineering(df_4)
+    df_5 = get_dummies(df_4)
+    return df_5
 
