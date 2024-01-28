@@ -17,3 +17,8 @@ sedan
 subcompact
 suv
 van
+avg_price
+avg_mileage
+avg_antiquity
+avg_price_per_milleage
+avg_price_per_antiquity

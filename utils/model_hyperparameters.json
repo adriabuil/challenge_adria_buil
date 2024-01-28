@@ -1,19 +1,15 @@
 {
-"task": "train", 
-"boosting_type": "gbdt", 
-"objective": "regression",
-"metric": "rmse",
-"device_type": "cpu",
 "learning_rate": 0.01,
-"max_depth": -1,
-"num_leaves": 186,
-"feature_fraction": 0.7418973500708376,
-"bagging_fraction": 0.6925984954767666,
-"max_bin": 512,
+"num_leaves": 53,
+"feature_fraction": 0.5780093202212182,
+"bagging_fraction": 0.5290418060840998,
 "verbosity": -1,
 "random_state": 42,
+"device_type": "cpu",
+"objective": "regression",
+"metric": "rmse",
 "num_threads": 6,
 "lambda_l1": 1,
-"min_sum_hessian_in_leaf": 7.68270255534186,
-"num_iterations": 486
+"min_sum_hessian_in_leaf": 8.661895281603577,
+"num_iterations": 707
 }

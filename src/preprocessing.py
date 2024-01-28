@@ -12,6 +12,14 @@ def delete_outliers(dataframe):
     min_mileage = 0
     max_mileage = 500000
     dataframe = dataframe.loc[(dataframe['mileage'] >= min_mileage) & (dataframe['mileage'] <= max_mileage)]
+
+    min_price = 1000
+    max_price = 70000
+    dataframe = dataframe.loc[(dataframe['price'] >= min_price) & (dataframe['price'] <= max_price)]
+
+    min_engine_power = 10
+    dataframe = dataframe.loc[(dataframe['engine_power'] >= min_engine_power)]
+
     return dataframe
 
 def strings_to_date(dataframe):
@@ -19,7 +27,7 @@ def strings_to_date(dataframe):
         if 'registration' in column or 'sold' in column:
             if dataframe[column].dtype == 'object':
                 try:
-                    dataframe[column] = pd.to_datetime(dataframe[column], format='%d/%m/%Y')
+                    dataframe[column] = pd.to_datetime(dataframe[column], format='%m/%d/%Y')
                 except ValueError:
                     continue
     return dataframe
@@ -46,7 +54,8 @@ def strings_to_numeric(dataframe):
 
 
 def get_dummies(dataframe):
-    for column in dataframe.columns:
+    columns_tu_get_dummies = ['fuel', 'paint_color', 'car_type']
+    for column in columns_tu_get_dummies:
         if dataframe[column].dtype == 'object':
             try:
                 dummies = pd.get_dummies(dataframe[column])
@@ -55,23 +64,3 @@ def get_dummies(dataframe):
             except ValueError:
                 continue
     return dataframe
-
-
-def feature_engineering(dataframe):
-    dataframe['antiquity'] = (dataframe['sold_at'] - dataframe['registration_date']).dt.days / 365.25
-    # dataframe['mil/ant'] = dataframe['mileage'] / dataframe['antiquity']
-    # dataframe['eng/ant'] = dataframe['engine_power'] / dataframe['antiquity']
-    # dataframe['mil/eng'] = dataframe['mileage'] / dataframe['engine_power']
-
-
-def get_train_data(data):
-    df = load_data(data)
-    df.drop(columns=['maker_key', 'model_key'], inplace=True)
-    df_1 = delete_outliers(df)
-    df_2 = strings_to_date(df_1)
-    df_3 = booleans_to_numeric(df_2)
-    df_4 = strings_to_numeric(df_3)
-    feature_engineering(df_4)
-    df_5 = get_dummies(df_4)
-    return df_5
-
