@@ -1,7 +1,7 @@
 # Challenge - Adrià Buil
 
 ## Description   
-This project trains a Light GBM model using data_pricing_challenge.csv
+This project trains a Light GBM model using data_pricing_challenge.csv data
 To answer specifc questions of the challenge, different notebooks have been prepared.
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------

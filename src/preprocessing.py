@@ -13,10 +13,6 @@ def delete_outliers(dataframe):
     max_mileage = 500000
     dataframe = dataframe.loc[(dataframe['mileage'] >= min_mileage) & (dataframe['mileage'] <= max_mileage)]
 
-    min_price = 1000
-    max_price = 70000
-    dataframe = dataframe.loc[(dataframe['price'] >= min_price) & (dataframe['price'] <= max_price)]
-
     min_engine_power = 10
     dataframe = dataframe.loc[(dataframe['engine_power'] >= min_engine_power)]
 
