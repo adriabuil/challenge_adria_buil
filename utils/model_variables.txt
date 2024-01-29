@@ -9,16 +9,10 @@ feature_5
 feature_6
 feature_7
 feature_8
-convertible
-coupe
 estate
 hatchback
 sedan
-subcompact
 suv
-van
-avg_price
 avg_mileage
 avg_antiquity
-avg_price_per_milleage
-avg_price_per_antiquity
+avg_engine_power

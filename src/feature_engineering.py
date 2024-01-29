@@ -28,11 +28,12 @@ def get_avg_antiquity_model_key(dataframe):
     dataframe_merged['avg_antiquity'] = dataframe_merged['avg_antiquity'].round(2)
     return dataframe_merged
 
-def get_relations(dataframe):
-    dataframe['avg_price_per_milleage'] = (dataframe['avg_price'] / dataframe['avg_mileage']).round(4)
-    dataframe['avg_price_per_antiquity'] = (dataframe['avg_price'] / dataframe['avg_antiquity']).round(4)
-    dataframe['price_per_milleage'] = (dataframe['price'] / dataframe['mileage']).round(4)
-    dataframe['price_per_antiquity'] = (dataframe['price'] / dataframe['antiquity']).round(4)
+def get_avg_engine_power_model_key(dataframe):
+    dataframe_agg = dataframe.groupby(['model_key']).agg(avg_engine_power=('engine_power', 'mean')).reset_index()
+    dataframe_merged = pd.merge(dataframe, dataframe_agg, on='model_key', how='left')
+    dataframe_merged['avg_engine_power'] = dataframe_merged['avg_engine_power'].round(2)
+    return dataframe_merged
+    
     return dataframe
 
 def get_train_data(data):
@@ -46,6 +47,6 @@ def get_train_data(data):
     df_7 = get_avg_price_model_key(df_6)
     df_8 = get_avg_mileage_model_key(df_7)
     df_9 = get_avg_antiquity_model_key(df_8)
-    df_10 = get_relations(df_9)
+    df_10 = get_avg_engine_power_model_key(df_9)
     df_10.drop(columns=['maker_key', 'model_key'], inplace=True)
     return df_10
