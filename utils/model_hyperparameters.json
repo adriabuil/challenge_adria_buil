@@ -1,8 +1,8 @@
 {
 "learning_rate": 0.01,
-"num_leaves": 53,
-"feature_fraction": 0.5780093202212182,
-"bagging_fraction": 0.5290418060840998,
+"num_leaves": 159,
+"feature_fraction": 0.8668126740084376,
+"bagging_fraction": 0.6622238407613176,
 "verbosity": -1,
 "random_state": 42,
 "device_type": "cpu",
@@ -10,6 +10,6 @@
 "metric": "rmse",
 "num_threads": 6,
 "lambda_l1": 1,
-"min_sum_hessian_in_leaf": 8.661895281603577,
-"num_iterations": 707
+"min_sum_hessian_in_leaf": 2.8481072582126026,
+"num_iterations": 487
 }

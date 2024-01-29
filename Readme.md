@@ -1,38 +1,38 @@
 # Challenge - Adrià Buil
 
 ## Description   
-	This project trains a Light GBM model using data_pricing_challenge.csv data
+	This project trains a Light GBM model using data_pricing_challenge.csv data.
 	To answer specifc questions of the challenge, different notebooks have been prepared.
 
 ---------------------------------------------------------------------------------------------------------------
 
+### data
+	Data available for the project (data_pricing_challenge.csv)
 
-## src
+### models
+	Different models tested can be stored in this folder (by now, only baseline and final ones).
+	To improve the model registry, each model variables and hyperparamters should be also stored here.
 
-	1)	preprocessing.py:
-	2) 	feature_engineering.py:
-	3)	model_training.py:
+### src
+	Python scripts used in notebooks are available in this folder
+	1)	preprocessing.py
+	2) 	feature_engineering.py
+	3)	model_training.py
 
+### utils
+	In this folder, final model variables and hyperparamters are available:
+	1)	model_hyperparameters.json
+	2)	model_variables.md
 
-
-
---------------------------------------------------------------------------------------------------------------
-
-
-## utils
-
-	1)	model_hyperparameters.json:
-	2)	model_variables.md:
-
----------------------------------------------------------------------------------------------------------------
-
-## Notebooks
-
+### notebooks
 	In this folder we can find 3 notebooks:
 	1) 	eda.ipynb --> Fast EDA used to understand the data and prepare some transformation before training the model
 	2) 	model_validation.ipynb --> Notebook that gets the data from the excel, applies preprocessing.py and feature_engineering.py data transformation and trains a LightGBM model using model_training.py. 
 	Used to test different models, stored at models folder.
 	3) 	predictor.ipynb --> Notebook prepared to answer Question 3
+
+### main.py
+	This field could be used in the future, once model development stage is completed and model is ready to be automated.
 
 
 ---------------------------------------------------------------------------------------------------------------
@@ -42,6 +42,7 @@
 1)	What are the most important characteristics and features that determine the selling price of a used car?
 
 Answer:
+
 	As seen in the feature importance matrix in Model Validation notebook, most importance features are Antiquity, Mileage and Engine Power, followed by AVG created variables and fetures 5 and 6.
 
 2)	How does the estimated value of a car change over time?
@@ -78,26 +79,36 @@ Answer:
 				antiquity = antiquity +1
 		4)	Predict price after 1 year and +10,000 miles.
 		5)	Calculate Loss in value = Current price - predicted price.
-		6)	Maximize loss in value --> BMW	X4	53055	140	07/01/2015	diesel	black	suv.
+		6)	Maximize loss in value --> BMW; X4; 53055; 140; 07/01/2015; diesel; black; suv
+
+	Loss in value for car selected is positive, which seems counter intuitive
+	With available data for training, prediction of the model estimates that for the selected car, selling price after 1 year and 10000 miles will be higher than current one.
+
 
 4)	Please share the out-of-sample accuracy metric for the model you used to answer the above questions.
 
 Answer:
-		- 	RMSE train: 1772.7817363501013
-		- 	RMSE test: 2665.9339652313533
+	RMSE train: 3377.922257434325 
+	RMSE test: 2737.5692747365324
 
-		- 	MAE train: 1200.4274307275098
-		- 	MAE test: 1753.9790611735534
+	MAE train: 1242.1251848822146 
+	MAE test: 1728.8835849061243
+	
+	R2 train: 0.8716846816833517 
+	R2 test: 0.8879549109382575
 
-		- 	R2 train: 0.9532210392321492
-		- 	R2 test: 0.9095318245994384
 
 5)	Feel free to share any other interesting insights worth mentioning.
 
 Answer:
-	An upgrade of the model would be needed to answer better question 3:
-		- 	Collecting more data.
-		- 	Exploiting current one, adding more variables such as purchase_price could help. 
+	Predicted price adjusts correctly in general, but overestimations could lead to mistakes while minimizing loss of value.
 
-	Notes:
-		- 	Loss in value of value selected is positive, which may seem contraituitive, but since current business need is selecting the most appropiate car to sell and not defining the exact value, the solution defined is still useful.
+	Business needs must be understood to adjust it. 
+
+	If appliable, punish overestimations (pred_price > real_price) over subestimations (pred price < real price).
+
+	Further steps to upgrade the model:
+		Collect more data
+		Define new variables (e.g., purchase price)
+		Collect market trends
+
