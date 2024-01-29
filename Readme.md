@@ -41,14 +41,10 @@
 
 1)	What are the most important characteristics and features that determine the selling price of a used car?
 
-Answer:
-
 	As seen in the feature importance matrix in Model Validation notebook, most importance features are Antiquity, Mileage and Engine Power, followed by AVG created variables and fetures 5 and 6.
 
 2)	How does the estimated value of a car change over time?
 
-Answer:
-	
 	As expected:
     -	Car price descreases with antiquity.
         -	2012, 2013 and 2014 are the years with more registred cars.
@@ -70,7 +66,6 @@ Answer:
 
 3)	Assume you need a car for a year (buy it now and sell in 1 year) and will drive approx. 10,000 miles during this time frame. You want to spend at least $20k. What particular car from this data set would you buy (selling price has to be at least $20k at the moment of purchase) if you want to minimize the loss in absolute value in $ when you sell it. (Loss in value is $ defined as: Price at purchase – price after a year)
 
-Answer:
 	Methodoly used is the following:
 		1)	Train a model with available data.
 		2)	Filter data by current price >= $20k.
@@ -87,7 +82,6 @@ Answer:
 
 4)	Please share the out-of-sample accuracy metric for the model you used to answer the above questions.
 
-Answer:
 	RMSE train: 3377.922257434325 
 	RMSE test: 2737.5692747365324
 
@@ -100,7 +94,6 @@ Answer:
 
 5)	Feel free to share any other interesting insights worth mentioning.
 
-Answer:
 	Predicted price adjusts correctly in general, but overestimations could lead to mistakes while minimizing loss of value.
 
 	Business needs must be understood to adjust it. 
