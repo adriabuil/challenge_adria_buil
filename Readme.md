@@ -14,16 +14,13 @@ XXXXX
 
 ## src
 
-# preprocessing.py
+	1)	preprocessing.py:
+	2) 	feature_engineering.py:
+	3)	model_training.py:
 
-This script is able to train a RNN using the original excel given.
 
-	1) Get data from an excel file without formatting
-	2) Transform the data into a pandas dataframe with the correct format (see preprocessing.py in /scripts for more details)
-	3) Creates a GluonTS dataset from the pandas dataframe and uses it to train a deepAREstimator, a RNN designed to predict Time Series Data.
-	4) Serializes the model traind and saves it in the "/model" folder in order to use it later.
+# feature_engineering.py
 
-# app.py
 
 This script creates an API that is able to get POST request with the JSON format given and returns a dictionary with the predictions for each book.
 
@@ -39,58 +36,78 @@ This script creates an API that is able to get POST request with the JSON format
 
 In the scripts folder we have 2 python files:
 
-	1) preprocessing.py --> Includes most functions used to process the data in the app
-	2) estimator.py --> Includes the functions used to train and inference the RNN and the construction of GluonTS datasets.
 
 
----------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------
 
 ## Notebooks
 
-In this folder we can find 2 notebooks:
-
-	1) EDA.ipynb --> Fast EDA used to understand the data and prepare some transformation before training the model
-	2) rnn_training.ipynb --> Notebook that gets the data from the excel and trains a RNN, I used it to test different variations and epochs and optain results. 
-				  I tested the model using the 3 last periods of the known dataset.
-
-
+In this folder we can find 3 notebooks:
+	1) 	eda.ipynb --> Fast EDA used to understand the data and prepare some transformation before training the model
+	2) model_validation.ipynb --> Notebook that gets the data from the excel, applies preprocessing.py and feature_engineering.py data transformation and trains a LightGBM model using model_training.py.
+		Used to test different models, stored at models folder.
+	3) predictor.ipynb --> Notebook prepared to answer Question 3
 
 
-
-
+---------------------------------------------------------------------------------------------------------------
 
 ## Answer to Challenge questions
 
 1) What are the most important characteristics and features that determine the selling price of a
 used car?
 
-Answer:
+As seen in the feature importance matrix in Model Validation notebook, most importance features are Antiquity, Mileage and Engine Power, followed by AVG created variables and fetures 5 and 6.
 
 2) How does the estimated value of a car change over time?
 
-Answer:
+As expected:
+    - Car price descreases with antiquity.
+        - 2012, 2013 and 2014 are the years with more registred cars.
+    - Car price decreases with mileage.
+        - Mileage range mean is 140827, being the most common range from 120000 to 180000.
+    - Car price increases with engine power.
+        - Engine power mean is 129, being the most common range from 104 to 184.
 
-a. Does a relative change in selling price over time differ significantly with respect to any of
-the car characteristics, e.g., color, price range or features?
+- Most common fuel is diesel.
+    - Petrol cars have a significant sales peak on May.
 
-Answer:
+- Subdued colors (i.e., black, grey, brown and white) are the most sold, only blue can be compared to them.
+    - Black and Blue suffer the most with summer arrival.
+        
+- Estate, Hatchback, Sedan and Suv are the most sold car types
+    - Suv is more sold in summer
 
-b. Are there any statistically significant seasonality patterns in pricing, e.g. certain car types
-being more expensive in summer than winter?
 
-Answer
 
 3. Assume you need a car for a year (buy it now and sell in 1 year) and will drive approx. 10,000 miles during this time frame. You want to spend at least $20k.
 What particular car from this data set would you buy (selling price has to be at least $20k at the moment of purchase) if you want to minimize the loss in absolute value in $ when you sell it. (Loss in value is $ defined as: Price at purchase – price after a year)
 
-Answer:
+Methodoly used is the following:
+	1. Train a model with available data.
+	2. Filter data by current price >= $20k.
+	3. Add to available registers:
+		mileage = mileage + 10,000
+		antiquity = antiquity +1
+	4. Predict price after 1 year and +10,000 miles.
+	5. Calculate Loss in value = Current price - predicted price
+	6. Maximize loss in value --> BMW	X4	53055	140	07/01/2015	diesel	black	suv	
 
 4. Please share the out-of-sample accuracy metric for the model you used to answer the above questions.
 
-Answer:
+RMSE train: 1772.7817363501013
+RMSE test: 2665.9339652313533
+
+MAE train: 1200.4274307275098
+MAE test: 1753.9790611735534
+
+R2 train: 0.9532210392321492
+R2 test: 0.9095318245994384
 
 5. Feel free to share any other interesting insights worth mentioning.
-En la prediccion simplemente tengo que seleccionar un coche... por eso no me afecta mucho el echo de que algunos estén por enciam la media...
 
-Answer:
-me quedo con el maximo y punto. lo que sí que es verdad, es que en un futuro deberiamos ver como tratar estos casos para que las predicciones sean mas robustas.
+Point 3 is 
+
+
+- En la prediccion simplemente tengo que seleccionar un coche... por eso no me afecta mucho el echo de que algunos estén por enciam la media...
+
+- me quedo con el maximo y punto. lo que sí que es verdad, es que en un futuro deberiamos ver como tratar estos casos para que las predicciones sean mas robustas.
