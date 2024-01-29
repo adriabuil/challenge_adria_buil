@@ -1,8 +1,8 @@
 # Challenge - Adrià Buil
 
 ## Description   
-This project trains a Light GBM model using data_pricing_challenge.csv data
-To answer specifc questions of the challenge, different notebooks have been prepared.
+	This project trains a Light GBM model using data_pricing_challenge.csv data
+	To answer specifc questions of the challenge, different notebooks have been prepared.
 
 ---------------------------------------------------------------------------------------------------------------
 
@@ -24,13 +24,11 @@ To answer specifc questions of the challenge, different notebooks have been prep
 	1)	model_hyperparameters.json:
 	2)	model_variables.md:
 
-
-
 ---------------------------------------------------------------------------------------------------------------
 
 ## Notebooks
 
-In this folder we can find 3 notebooks:
+	In this folder we can find 3 notebooks:
 	1) 	eda.ipynb --> Fast EDA used to understand the data and prepare some transformation before training the model
 	2) 	model_validation.ipynb --> Notebook that gets the data from the excel, applies preprocessing.py and feature_engineering.py data transformation and trains a LightGBM model using model_training.py. 
 	Used to test different models, stored at models folder.
@@ -41,15 +39,14 @@ In this folder we can find 3 notebooks:
 
 ## Answer to Challenge questions
 
-	1)	What are the most important characteristics and features that determine the selling price of a
-used car?
+1)	What are the most important characteristics and features that determine the selling price of a used car?
 
-	Answer:
+Answer:
 	As seen in the feature importance matrix in Model Validation notebook, most importance features are Antiquity, Mileage and Engine Power, followed by AVG created variables and fetures 5 and 6.
 
-	2)	How does the estimated value of a car change over time?
+2)	How does the estimated value of a car change over time?
 
-	Answer:
+Answer:
 	
 	As expected:
     -	Car price descreases with antiquity.
@@ -70,9 +67,9 @@ used car?
 
 
 
-	3)	Assume you need a car for a year (buy it now and sell in 1 year) and will drive approx. 10,000 miles during this time frame. You want to spend at least $20k. What particular car from this data set would you buy (selling price has to be at least $20k at the moment of purchase) if you want to minimize the loss in absolute value in $ when you sell it. (Loss in value is $ defined as: Price at purchase – price after a year)
+3)	Assume you need a car for a year (buy it now and sell in 1 year) and will drive approx. 10,000 miles during this time frame. You want to spend at least $20k. What particular car from this data set would you buy (selling price has to be at least $20k at the moment of purchase) if you want to minimize the loss in absolute value in $ when you sell it. (Loss in value is $ defined as: Price at purchase – price after a year)
 
-	Answer:
+Answer:
 	Methodoly used is the following:
 		1)	Train a model with available data.
 		2)	Filter data by current price >= $20k.
@@ -83,9 +80,9 @@ used car?
 		5)	Calculate Loss in value = Current price - predicted price.
 		6)	Maximize loss in value --> BMW	X4	53055	140	07/01/2015	diesel	black	suv.
 
-	4)	Please share the out-of-sample accuracy metric for the model you used to answer the above questions.
+4)	Please share the out-of-sample accuracy metric for the model you used to answer the above questions.
 
-	Answer:
+Answer:
 		- 	RMSE train: 1772.7817363501013
 		- 	RMSE test: 2665.9339652313533
 
@@ -95,9 +92,9 @@ used car?
 		- 	R2 train: 0.9532210392321492
 		- 	R2 test: 0.9095318245994384
 
-	5)	Feel free to share any other interesting insights worth mentioning.
+5)	Feel free to share any other interesting insights worth mentioning.
 
-	Answer:
+Answer:
 	An upgrade of the model would be needed to answer better question 3:
 		- 	Collecting more data.
 		- 	Exploiting current one, adding more variables such as purchase_price could help. 
