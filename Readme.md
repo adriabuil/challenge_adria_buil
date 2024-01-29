@@ -4,13 +4,8 @@
 This project trains a Light GBM model using data_pricing_challenge.csv data
 To answer specifc questions of the challenge, different notebooks have been prepared.
 
----------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------
 
-## How to run:
-
-XXXXX
-
----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## src
 
@@ -19,22 +14,15 @@ XXXXX
 	3)	model_training.py:
 
 
-# feature_engineering.py
 
 
-This script creates an API that is able to get POST request with the JSON format given and returns a dictionary with the predictions for each book.
-
-	1) Initializes a Flask app in localhost port 5000.
-	2) Get requests in JSON format and transform the data in a GluonTS dataset.
-	3) Get the RNN trained and inference it with the dataset.
-	4) Save the results in a dictionary and return them as a response to the API POST request.
-
----------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
 
 
 ## utils
 
-In the scripts folder we have 2 python files:
+	1)	model_hyperparameters.json:
+	2)	model_variables.md:
 
 
 
